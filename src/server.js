@@ -30,5 +30,5 @@ app.use((req, res) => {
 
 // Start the server
 app.listen(3000, () => {
-    console.log('Server running on https://auth-express-1.onrender.com');
+    console.log('Server running on port 3000');
 });
