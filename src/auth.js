@@ -6,7 +6,7 @@ async function authenticateUser(email, password) {
     try {
         console.log('Authenticating user with email:', email); // Log the email being queried
         
-        const result = await pool.query('SELECT * FROM list_revendeur WHERE email = $1', [email]);
+        const result = await pool.query('SELECT * FROM test_list_revendeur WHERE email = $1', [email]);
         //console.log('Database result:', result.rows); // Log database result
         
         if (result.rows.length > 0) {
