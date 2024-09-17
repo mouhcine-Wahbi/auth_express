@@ -7,6 +7,9 @@ const pool = new Pool({
     database: 'test_revendeur',
     password: 'dQk25lpuozzfABljrKbu7SO3e4XzankH',
     port: 5432,
+    ssl: {
+        rejectUnauthorized: false  // This bypasses certificate validation (for self-signed certs). Set to true in production with valid certs.
+      }
 });
 
 
