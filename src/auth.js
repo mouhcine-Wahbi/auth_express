@@ -4,30 +4,25 @@ require('dotenv').config();
 
 async function authenticateUser(email, password) {
     try {
-        console.log('Authenticating user with email:', email); // Log the email being queried
+        console.log('Authenticating user with email:', email);
         
-        const result = await pool.query('SELECT * FROM test_list_revendeur WHERE email = $1', [email]);
-        //console.log('Database result:', result.rows); // Log database result
+        const [rows] = await pool.query('SELECT * FROM list_revendeur WHERE email_rev = ?', [email]);
         
-        if (result.rows.length > 0) {
-            const user = result.rows[0];
-            //console.log('User found:', user); // Log the user found
-            
+        if (rows.length > 0) {
+            const user = rows[0];
+
             // Ensure both values are strings before comparison
             if (password.trim() === String(user.password).trim()) {
-                //console.log(password)
                 return true;
-            }            
+            }
         }
-        
-        console.log('Authentication failed: Invalid credentials ');
+
+        console.log('Authentication failed: Invalid credentials');
         return false;
     } catch (err) {
         console.error('Error during authentication:', err);
         return false;
     }
 }
-
-
 
 module.exports = { authenticateUser };

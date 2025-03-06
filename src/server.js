@@ -1,16 +1,18 @@
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const routes = require('./routes');
 require('dotenv').config();
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'b5e3e3caf2ad9bdba1ff21b0dbab686060ee885f3ba115da7dc764f4bf20954f9535d97dc7822a83edd9c7e72186b38ec0c3c8f1db87a1129c4ab3664cd6a0f3',
+    secret: process.env.SESSION_SECRET || '4fc5ccd7bfc16a4721fbeee00eca83dbb9234517b9aeabd4c85a46dcc068e9261eac75237bf4d4e099ab27ef422d82b4676ccce8cfd883449bf9556f9be71fdb',
     resave: false,
     saveUninitialized: true,
 }));
@@ -29,6 +31,7 @@ app.use((req, res) => {
 });
 
 // Start the server
-app.listen(3000, () => {
-    console.log('Server running on port 3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
 });
